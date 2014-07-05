@@ -4,9 +4,7 @@ package com.unrelentless.fcraft;
 import java.io.File;
 import java.io.IOException;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.input.Keyboard;
 
