@@ -37,7 +37,7 @@ public class FantasyCraft
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) throws IOException{
 
-		ConfigHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + this.MODID + File.separator + this.MODID + ".cfg"));
+		ConfigHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + FantasyCraft.MODID + File.separator + FantasyCraft.MODID + ".cfg"));
 
 	}
 	@EventHandler
