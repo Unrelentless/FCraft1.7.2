@@ -22,7 +22,7 @@ public class FCraftCreativeTab extends CreativeTabs{
 	@Override
 	public Item getTabIconItem() {
 		// TODO Auto-generated method stub
-		return Item.getItemFromBlock(Blocks.jukebox);
+		return Item.getItemFromBlock(Blocks.fire);
 	}
 
 }

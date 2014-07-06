@@ -1,11 +1,15 @@
 package com.unrelentless.fcraft.proxy;
 
-import com.unrelentless.fcraft.proxy.CommonProxy;
+import com.unrelentless.fcraft.blocks.tile.TileEntityBlockMako;
+import com.unrelentless.fcraft.renderer.RenderTileBlockMako;
+
+import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy{
 	@Override
     public void registerRenderers() {
-            // This is for rendering entities and so forth later on
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockMako.class, new RenderTileBlockMako());
+
     }
 }
 

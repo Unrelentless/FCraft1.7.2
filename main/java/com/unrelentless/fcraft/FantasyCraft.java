@@ -5,9 +5,12 @@ import java.io.File;
 import java.io.IOException;
 
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.creativetab.CreativeTabs;
 
 import org.lwjgl.input.Keyboard;
 
+import com.unrelentless.fcraft.blocks.FCraftBlock;
+import com.unrelentless.fcraft.creativetabs.FCraftCreativeTab;
 import com.unrelentless.fcraft.handlers.ConfigHandler;
 import com.unrelentless.fcraft.handlers.KeybindHandler;
 import com.unrelentless.fcraft.proxy.CommonProxy;
@@ -25,7 +28,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class FantasyCraft
 {
 	public static final String MODID = "fcraft";
-	public static final String VERSION = "0.0.1";
+	public static final String VERSION = "0.0.2";
 
 	//Keybinds
 	public static KeyBinding scan, scanPoke;
@@ -34,11 +37,13 @@ public class FantasyCraft
 	@SidedProxy(clientSide = "com.unrelentless.fcraft.proxy.ClientProxy", serverSide = "com.unrelentless.fcraft.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
+	public static CreativeTabs fcraftTabBlocks = new FCraftCreativeTab(CreativeTabs.getNextID(), MODID);
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) throws IOException{
 
 		ConfigHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + FantasyCraft.MODID + File.separator + FantasyCraft.MODID + ".cfg"));
-
+		FCraftBlock.init();
 	}
 	@EventHandler
 	public void init(FMLInitializationEvent event)
