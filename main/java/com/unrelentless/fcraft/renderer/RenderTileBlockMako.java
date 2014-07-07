@@ -35,5 +35,4 @@ public class RenderTileBlockMako extends TileEntitySpecialRenderer  {
     	GL11.glDisable(3042);
     	GL11.glPopMatrix();
 	}
-
 }

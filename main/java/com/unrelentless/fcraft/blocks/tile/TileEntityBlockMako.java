@@ -1,5 +1,6 @@
 package com.unrelentless.fcraft.blocks.tile;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBlockMako extends TileEntity {
@@ -23,5 +24,16 @@ public class TileEntityBlockMako extends TileEntity {
 		for(int i=0;i<colour.length;i++){
 			this.colours[i] = colour[i];
 		}
+	}
+	
+	public void writeToNBT(NBTTagCompound par1)
+	{
+		super.writeToNBT(par1);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound par1)
+	{
+		super.readFromNBT(par1);
 	}
 }

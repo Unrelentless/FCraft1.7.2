@@ -7,15 +7,12 @@ import java.io.IOException;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 
-import org.lwjgl.input.Keyboard;
-
 import com.unrelentless.fcraft.blocks.FCraftBlock;
 import com.unrelentless.fcraft.creativetabs.FCraftCreativeTab;
 import com.unrelentless.fcraft.handlers.ConfigHandler;
 import com.unrelentless.fcraft.handlers.KeybindHandler;
 import com.unrelentless.fcraft.proxy.CommonProxy;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -51,10 +48,10 @@ public class FantasyCraft
 		proxy.registerRenderers();
 
 		//keybinding
-		scan = new KeyBinding("key.scanBlock", Keyboard.KEY_F, "key.categories.xxxmod");
+/*		scan = new KeyBinding("key.scanBlock", Keyboard.KEY_F, "key.categories.xxxmod");
 		scanPoke = new KeyBinding("key.scanPoke", Keyboard.KEY_G, "key.categories.xxxmod");
 		ClientRegistry.registerKeyBinding(scan);
-		ClientRegistry.registerKeyBinding(scanPoke);
+		ClientRegistry.registerKeyBinding(scanPoke);*/
 
 		//event registration
 		FMLCommonHandler.instance().bus().register(new KeybindHandler());
