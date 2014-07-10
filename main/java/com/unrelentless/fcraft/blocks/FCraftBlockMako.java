@@ -55,7 +55,6 @@ public class FCraftBlockMako extends BlockContainer {
 		float[] colours = new float[3];
 		
 		if(tile != null && ticks%100==0){
-			tile.setScale(0.5F + rand.nextFloat());
 			for(int i=0;i<colours.length;i++){
 				colours[i] = rand.nextFloat();
 			}

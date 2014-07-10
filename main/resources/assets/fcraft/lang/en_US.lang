@@ -1,7 +1,7 @@
 ################################
 #	BLOCKS
 ################################
-tile.blockMateria.name=Crystallized Mako
+tile.blockMako.name=Crystallized Mako
 
 
 
@@ -19,7 +19,7 @@ tile.blockMateria.name=Crystallized Mako
 ################################
 #	ENTITIES
 ################################
-
+entity.entityOrichalcum.name=Orichalcum
 
 
 

@@ -9,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 
 import com.unrelentless.fcraft.blocks.FCraftBlock;
 import com.unrelentless.fcraft.creativetabs.FCraftCreativeTab;
+import com.unrelentless.fcraft.entity.FCraftEntity;
 import com.unrelentless.fcraft.handlers.ConfigHandler;
 import com.unrelentless.fcraft.handlers.KeybindHandler;
 import com.unrelentless.fcraft.proxy.CommonProxy;
@@ -16,6 +17,7 @@ import com.unrelentless.fcraft.proxy.CommonProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -36,11 +38,16 @@ public class FantasyCraft
 
 	public static CreativeTabs fcraftTabBlocks = new FCraftCreativeTab(CreativeTabs.getNextID(), MODID);
 	
+	@Instance(MODID)
+	public static FantasyCraft instance;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) throws IOException{
-
-		ConfigHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + FantasyCraft.MODID + File.separator + FantasyCraft.MODID + ".cfg"));
+		
+		ConfigHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + FantasyCraft.MODID + File.separator + FantasyCraft.MODID + ".cfg"));	
 		FCraftBlock.init();
+		FCraftEntity.init();
+
 	}
 	@EventHandler
 	public void init(FMLInitializationEvent event)
