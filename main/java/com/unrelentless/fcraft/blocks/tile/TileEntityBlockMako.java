@@ -1,7 +1,8 @@
 package com.unrelentless.fcraft.blocks.tile;
 
-import net.minecraft.nbt.NBTTagCompound;
+import java.util.Random;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBlockMako extends TileEntity {
