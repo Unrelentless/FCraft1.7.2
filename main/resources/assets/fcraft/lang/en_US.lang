@@ -2,6 +2,15 @@
 #	BLOCKS
 ################################
 tile.blockMako.name=Crystallized Mako
+tile.ore.mythrilore.name=Mythril Ore
+tile.ore.orichore.name=Orichalcum Ore
+tile.ore.adamore.name=Adamantite Ore
+tile.ore.zincore.name=Zincatite Ore
+tile.ore.platinumore.name=Platinum Ore
+tile.ore.gemsteelore.name=Gemsteel ore
+tile.ore.zodiacore.name=Zodiac Ore
+tile.ore.einore.name=Einherjarium Ore
+tile.ore.scarletore.name=Scarletite Ore
 
 
 

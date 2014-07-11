@@ -1,5 +1,7 @@
 package com.unrelentless.fcraft.entity;
 
+import com.unrelentless.fcraft.blocks.FCraftBlock;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSilverfish;
 import net.minecraft.entity.Entity;
@@ -7,6 +9,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -32,7 +35,7 @@ public class FCraftEntityOrich extends EntityBat{
 	protected void updateAITasks()
 	{
 		super.updateAITasks();
-		
+
 		for(int i=0;i<this.worldObj.getLoadedEntityList().size();i++){
 			if (((Entity)this.worldObj.loadedEntityList.get(i)).getDistanceToEntity(this)<8){
 				if (this.worldObj.loadedEntityList.get(i) instanceof EntityPlayer){
@@ -43,7 +46,8 @@ public class FCraftEntityOrich extends EntityBat{
 					Block block = this.worldObj.getBlock(x + Facing.offsetsXForSide[l1], y + Facing.offsetsYForSide[l1], z + Facing.offsetsZForSide[l1]);
 					if (block==(Blocks.stone))
 					{
-						this.worldObj.setBlock(x + Facing.offsetsXForSide[l1], y + Facing.offsetsYForSide[l1], z + Facing.offsetsZForSide[l1], Blocks.diamond_ore, 1, 3);
+						this.worldObj.setBlock(x + Facing.offsetsXForSide[l1], y + Facing.offsetsYForSide[l1],
+								z + Facing.offsetsZForSide[l1], Block.getBlockFromItem(new ItemStack(FCraftBlock.blockOre, 1, 1).getItem()), 1, 3);
 						this.spawnExplosionParticle();
 						this.setDead();
 					}else if(block!=Blocks.air){

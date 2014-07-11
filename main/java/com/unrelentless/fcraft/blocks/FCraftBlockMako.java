@@ -14,8 +14,8 @@ public class FCraftBlockMako extends BlockContainer {
 
 	int ticks;
 	
-	public FCraftBlockMako(Material material){
-		super(material);
+	public FCraftBlockMako(){
+		super(Material.glass);
 
 		this.setHardness(50.0F);
 		this.setResistance(50.0F);
