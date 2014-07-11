@@ -46,6 +46,9 @@ public class FCraftEntityOrich extends EntityBat{
 						this.worldObj.setBlock(x + Facing.offsetsXForSide[l1], y + Facing.offsetsYForSide[l1], z + Facing.offsetsZForSide[l1], Blocks.diamond_ore, 1, 3);
 						this.spawnExplosionParticle();
 						this.setDead();
+					}else if(block!=Blocks.air){
+						this.spawnExplosionParticle();
+						this.setDead();
 					}
 
 				}
