@@ -6,10 +6,12 @@ import java.io.IOException;
 
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.unrelentless.fcraft.blocks.FCraftBlock;
 import com.unrelentless.fcraft.creativetabs.FCraftCreativeTab;
 import com.unrelentless.fcraft.entity.FCraftEntity;
+import com.unrelentless.fcraft.events.ZodiacEventHandler;
 import com.unrelentless.fcraft.handlers.ConfigHandler;
 import com.unrelentless.fcraft.handlers.KeybindHandler;
 import com.unrelentless.fcraft.proxy.CommonProxy;
@@ -62,6 +64,7 @@ public class FantasyCraft
 
 		//event registration
 		FMLCommonHandler.instance().bus().register(new KeybindHandler());
+		MinecraftForge.EVENT_BUS.register(new ZodiacEventHandler());
 
 	}
 

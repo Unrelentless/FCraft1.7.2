@@ -3,7 +3,6 @@ package com.unrelentless.fcraft.entity;
 import com.unrelentless.fcraft.blocks.FCraftBlock;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSilverfish;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityBat;
