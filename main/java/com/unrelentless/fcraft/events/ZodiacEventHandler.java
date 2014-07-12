@@ -2,12 +2,19 @@ package com.unrelentless.fcraft.events;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 
+import com.unrelentless.fcraft.blocks.FCraftBlock;
+import com.unrelentless.fcraft.blocks.FCraftBlockOre;
 import com.unrelentless.fcraft.extendedprops.FCraftExtendedPlayer;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -15,12 +22,15 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ZodiacEventHandler {
 
+	Random rand = new Random();
+
 	Minecraft mc;
 
 	int maxZodiac;
 	int totalMined;
 	boolean reached = false;
-	List<Integer> individualZodiac = new ArrayList<Integer>();
+	List<EntityPlayer> playerList = new ArrayList<EntityPlayer>();
+	Block[] stoneArray = {Blocks.stone, Blocks.obsidian, Blocks.gravel};
 
 	@SubscribeEvent
 	public void onHarvestEvent(BreakEvent event) {
@@ -39,17 +49,31 @@ public class ZodiacEventHandler {
 				totalMined += event.getPlayer().getDataWatcher().getWatchableObjectInt(20);
 			}
 		}
-		
+
 		if(totalMined >= maxZodiac){
 			for(int j=0;j<event.getPlayer().worldObj.getLoadedEntityList().size();j++){
 				if (event.getPlayer().worldObj.loadedEntityList.get(j) instanceof EntityPlayer){
 					EntityPlayer player = (EntityPlayer) event.getPlayer().worldObj.loadedEntityList.get(j);
 					FCraftExtendedPlayer props = FCraftExtendedPlayer.get(player);
-					props.setZodiac(0);
-					
-					
+					props.setZodiac(0);	
+					playerList.add(player);
 				}
 			}
+			EntityPlayer player = playerList.get(rand.nextInt(playerList.size()));
+			int blockX = (int) (player.posX + rand.nextInt(128)-64);
+			int blockZ = (int) (player.posZ + rand.nextInt(128)-64);
+			int blockY = player.worldObj.getTopSolidOrLiquidBlock(blockX, blockZ);
+
+			player.worldObj.addWeatherEffect(new EntityLightningBolt(player.worldObj, player.posX+blockX, blockY, player.posZ+blockZ));
+			player.worldObj.setBlock(blockX, blockY, blockZ, FCraftBlock.blockOre, 6, 3);
+			for(int i=0;i<=40+rand.nextInt(40);i++){
+				int blockXRand = rand.nextInt(8)-4;
+				int blockYRand = rand.nextInt(8)-4;
+				int blockZRand = rand.nextInt(8)-4;
+
+				player.worldObj.setBlock(blockX+blockXRand, (int) (blockY+blockYRand), blockZ+blockZRand, stoneArray[rand.nextInt(stoneArray.length)]);
+			}
+			player.addChatMessage(new ChatComponentText(blockX+","+blockY+","+blockZ));
 		}
 	}
 }
