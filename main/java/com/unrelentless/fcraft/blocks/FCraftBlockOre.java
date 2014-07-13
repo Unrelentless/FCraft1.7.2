@@ -20,7 +20,7 @@ public class FCraftBlockOre extends Block {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] texture;
 
-	final static String[] subBlocks = {"mythrilore", "orichore", "adamore", "zincore", "platinumore", "damascusore", "zodiacore", "einore", "scarletore"};
+	final static String[] subBlocks = {"mythrilore", "orichore", "adamOreOld", "zincore", "platinumore", "damascusore", "zodiacore", "einore", "scarletore"};
 
 	public FCraftBlockOre(){
 		super(Material.rock);

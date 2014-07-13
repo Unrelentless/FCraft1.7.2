@@ -56,6 +56,7 @@ public class TileEntityBlockMako extends TileEntity {
 		}
 	}
 	
+	@Override
 	public void writeToNBT(NBTTagCompound par1)
 	{
 		super.writeToNBT(par1);
