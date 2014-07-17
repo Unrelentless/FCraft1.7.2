@@ -9,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.unrelentless.fcraft.blocks.FCraftBlock;
+import com.unrelentless.fcraft.blocks.tile.FCraftTileEntity;
 import com.unrelentless.fcraft.creativetabs.FCraftCreativeTab;
 import com.unrelentless.fcraft.entity.FCraftEntity;
 import com.unrelentless.fcraft.events.ExtendedPropertiesHandler;
@@ -31,7 +32,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class FantasyCraft
 {
 	public static final String MODID = "fcraft";
-	public static final String VERSION = "0.1.2";
+	public static final String VERSION = "0.1.3";
 
 	//Keybinds
 	public static KeyBinding scan, scanPoke;
@@ -52,6 +53,7 @@ public class FantasyCraft
 	public void preInit(FMLPreInitializationEvent event) throws IOException{
 
 		ConfigHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + FantasyCraft.MODID + File.separator + FantasyCraft.MODID + ".cfg"));	
+		FCraftTileEntity.init();
 		FCraftBlock.init();
 		FCraftEntity.init();
 

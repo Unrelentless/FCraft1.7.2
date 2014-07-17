@@ -20,7 +20,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class FCraftBlockAdamOre extends BlockContainer {
 
-	int ticks;
 	Minecraft mc;
 	Random rand = new Random();
 
@@ -58,48 +57,8 @@ public class FCraftBlockAdamOre extends BlockContainer {
 	{
 		if(!world.isRemote){
 			TileEntityBlockAdamOre tile = (TileEntityBlockAdamOre) world.getTileEntity(x, y, z);
-			tile.setActive();
-			player.addChatMessage(new ChatComponentText("Activated."));
+			player.addChatMessage(new ChatComponentText(""+tile.getStage()+", Inert:"+tile.isInert()));
 		}
 		return true;
 	}
-
-	@Override
-	public void randomDisplayTick(World world, int x, int y, int z, Random rand)
-	{
-		TileEntityBlockAdamOre tile = (TileEntityBlockAdamOre) world.getTileEntity(x, y, z);
-		int[] coords = {x, y, z};
-
-		if(tile != null){
-			int[] stoneCoords = searchStone(world, tile, coords);
-			if(!tile.isInert()){
-				world.setBlock(x+stoneCoords[0], y+stoneCoords[1], z+stoneCoords[2], FCraftBlock.blockAdamOre);
-				TileEntityBlockAdamOre tileBred = (TileEntityBlockAdamOre) world.getTileEntity(x+stoneCoords[0], y+stoneCoords[1], z+stoneCoords[2]);
-				tileBred.setInert();
-				ticks = 0;
-			}
-		}
-		ticks++;
-	}
-
-
-
-	private int[] searchStone(World world, TileEntityBlockAdamOre te, int[] coords){
-		int[] stoneCoords = {0, 0, 0};
-		outerloop:
-			for(int i=-1;i<=1;i++){
-				for(int j=-1;j<=1;j++){
-					for(int k=-1;i<=1;k++){
-						if(world.getBlock(coords[0]+i, coords[1]+j, coords[2]+k) == Blocks.stone){
-							stoneCoords[0] = i;
-							stoneCoords[1] = j;
-							stoneCoords[2] = k;
-							break outerloop;
-						}
-					}
-				}
-			}
-		return stoneCoords;
-	}
-
 }
