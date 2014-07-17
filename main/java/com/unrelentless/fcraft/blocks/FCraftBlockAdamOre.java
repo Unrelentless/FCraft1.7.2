@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.unrelentless.fcraft.FantasyCraft;
@@ -22,7 +23,8 @@ public class FCraftBlockAdamOre extends BlockContainer {
 
 	Minecraft mc;
 	Random rand = new Random();
-
+	IIcon texture;
+	
 	public FCraftBlockAdamOre(){
 		super(Material.rock);
 
@@ -37,8 +39,13 @@ public class FCraftBlockAdamOre extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister icon)
 	{
-		//registers the block texture to block
-		blockIcon = icon.registerIcon(String.format("%s:%s", FantasyCraft.MODID, ":Ore3"));	
+
+			texture = icon.registerIcon(FantasyCraft.MODID+":OreAdam");
+	}
+	
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		return texture;
 	}
 
 	//Makes sure that only the name and not tile.name is sent.
