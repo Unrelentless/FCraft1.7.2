@@ -9,12 +9,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 
 import com.unrelentless.fcraft.blocks.FCraftBlock;
 import com.unrelentless.fcraft.blocks.FCraftBlockOre;
+import com.unrelentless.fcraft.blocks.FCraftBlocks;
 import com.unrelentless.fcraft.extendedprops.FCraftExtendedPlayer;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -65,13 +67,20 @@ public class ZodiacEventHandler {
 			int blockY = player.worldObj.getTopSolidOrLiquidBlock(blockX, blockZ);
 
 			player.worldObj.addWeatherEffect(new EntityLightningBolt(player.worldObj, player.posX+blockX, blockY, player.posZ+blockZ));
-			player.worldObj.setBlock(blockX, blockY, blockZ, FCraftBlock.blockOre, 6, 3);
-			for(int i=0;i<=40+rand.nextInt(40);i++){
-				int blockXRand = rand.nextInt(8)-4;
-				int blockYRand = rand.nextInt(8)-4;
-				int blockZRand = rand.nextInt(8)-4;
+			player.worldObj.setBlock(blockX, blockY, blockZ, FCraftBlock.blockOre, 5, 3);
+			for(int j=0;j<=8;j++){
+				int blockXRand = rand.nextInt(2)-1;
+				int blockYRand = rand.nextInt(2)-1;
+				int blockZRand = rand.nextInt(2)-1;
 
-				player.worldObj.setBlock(blockX+blockXRand, (int) (blockY+blockYRand), blockZ+blockZRand, stoneArray[rand.nextInt(stoneArray.length)]);
+				player.worldObj.setBlock(blockX+blockXRand, (int) (blockY+blockYRand), blockZ+blockZRand, FCraftBlock.blockOre, 5, 3);
+			}
+			for(int i=0;i<=20+rand.nextInt(20);i++){
+				int blockXRand = rand.nextInt(6)-3;
+				int blockZRand = rand.nextInt(6)-3;
+				int blockYRand = player.worldObj.getTopSolidOrLiquidBlock(blockX+blockXRand, blockZ+blockZRand);
+
+				player.worldObj.setBlock(blockX+blockXRand, (int) (blockYRand), blockZ+blockZRand, stoneArray[rand.nextInt(stoneArray.length)]);
 			}
 			player.addChatMessage(new ChatComponentText(blockX+","+blockY+","+blockZ));
 		}
