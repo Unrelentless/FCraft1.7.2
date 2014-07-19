@@ -18,29 +18,28 @@ public class RenderTileBlockMako extends TileEntitySpecialRenderer  {
 
 	private IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation(FantasyCraft.MODID+":models/Crystal.obj"));
 	private ResourceLocation texture = new ResourceLocation(FantasyCraft.MODID + ":textures/blocks/CrystalTest.png");
-	IModelCustom[] models = new IModelCustom[4];
+	IModelCustom[] models = new IModelCustom[8];
 	Random rand = new Random();
-	
+
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y,
 			double z, float tick) {
-		
+
 		TileEntityBlockMako tile = (TileEntityBlockMako) tileEntity;
 		float[] colours = tile.getColour();
+		double randomScale = (rand.nextInt(3)+5)/10;
+
 		GL11.glPushMatrix();
 		GL11.glColor3f(colours[0],colours[1],colours[2]);
 		GL11.glEnable(3042);
 		GL11.glBlendFunc(770,771);
 		GL11.glTranslated(x, y, z);
-		GL11.glRotatef(180F, 0, 1, 0);
-		GL11.glTranslatef(-0.2F, 0, -0.4F);
-		GL11.glScalef(1.0F,1.0F,1.0F);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		model.renderAll();
 		GL11.glDisable(3042);
 		GL11.glPopMatrix();
-		
-		
+
+
 		for(int i=0;i<tile.getStage();i++){
 
 			models[i] = AdvancedModelLoader.loadModel(new ResourceLocation(FantasyCraft.MODID+":models/Crystal.obj"));
@@ -50,7 +49,9 @@ public class RenderTileBlockMako extends TileEntitySpecialRenderer  {
 			GL11.glEnable(3042);
 			GL11.glBlendFunc(770,771);
 			GL11.glTranslated(x, y, z);
-			GL11.glRotatef(180F, 0, 1, 0);
+			GL11.glTranslated((tile.getTrans()[i][0]), 0D, (tile.getTrans()[i][1]));	
+			GL11.glScaled(tile.getScale()[i],tile.getScale()[i], tile.getScale()[i]);
+			GL11.glRotated(tile.getAngles()[i][0], tile.getAngles()[i][1], tile.getAngles()[i][2], tile.getAngles()[i][3]);
 			Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 			models[i].renderAll();
 			GL11.glDisable(3042);
