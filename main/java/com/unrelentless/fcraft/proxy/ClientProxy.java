@@ -1,7 +1,9 @@
 package com.unrelentless.fcraft.proxy;
 
 import com.unrelentless.fcraft.blocks.tile.TileEntityBlockMako;
+import com.unrelentless.fcraft.entity.FCraftEntityFrog;
 import com.unrelentless.fcraft.entity.FCraftEntityOrich;
+import com.unrelentless.fcraft.renderer.RenderEntityFrog;
 import com.unrelentless.fcraft.renderer.RenderEntityOrichalcum;
 import com.unrelentless.fcraft.renderer.RenderTileBlockMako;
 
@@ -13,6 +15,7 @@ public class ClientProxy extends CommonProxy{
     public void registerRenderers() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockMako.class, new RenderTileBlockMako());
 		RenderingRegistry.registerEntityRenderingHandler(FCraftEntityOrich.class, new RenderEntityOrichalcum());
+		RenderingRegistry.registerEntityRenderingHandler(FCraftEntityFrog.class, new RenderEntityFrog());
 
     }
 }

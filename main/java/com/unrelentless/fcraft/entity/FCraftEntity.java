@@ -12,6 +12,7 @@ public class FCraftEntity {
 
 	public static void init(){
 		registerEntity(FCraftEntityOrich.class, "entityOrichalcum");
+		registerEntity(FCraftEntityFrog.class, "entityFrog");
 	}
 	
 	public static void registerEntity(Class entityClass, String name){
