@@ -12,7 +12,7 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 import com.unrelentless.fcraft.FantasyCraft;
-import com.unrelentless.fcraft.blocks.tile.TileEntityBlockMako;
+import com.unrelentless.fcraft.blocks.tiles.TileEntityBlockMako;
 
 public class RenderTileBlockMako extends TileEntitySpecialRenderer  {
 

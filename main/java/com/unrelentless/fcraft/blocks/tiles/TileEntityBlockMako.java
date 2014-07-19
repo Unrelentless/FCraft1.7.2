@@ -1,4 +1,4 @@
-package com.unrelentless.fcraft.blocks.tile;
+package com.unrelentless.fcraft.blocks.tiles;
 
 import java.util.Random;
 

@@ -1,8 +1,13 @@
 package com.unrelentless.fcraft.proxy;
 
-import com.unrelentless.fcraft.blocks.tile.TileEntityBlockMako;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.MinecraftForgeClient;
+
+import com.unrelentless.fcraft.blocks.tiles.TileEntityBlockMako;
 import com.unrelentless.fcraft.entity.FCraftEntityFrog;
 import com.unrelentless.fcraft.entity.FCraftEntityOrich;
+import com.unrelentless.fcraft.items.weapons.FCraftWeapon;
+import com.unrelentless.fcraft.renderer.RenderBusterSword;
 import com.unrelentless.fcraft.renderer.RenderEntityFrog;
 import com.unrelentless.fcraft.renderer.RenderEntityOrichalcum;
 import com.unrelentless.fcraft.renderer.RenderTileBlockMako;
@@ -17,6 +22,7 @@ public class ClientProxy extends CommonProxy{
 		RenderingRegistry.registerEntityRenderingHandler(FCraftEntityOrich.class, new RenderEntityOrichalcum());
 		RenderingRegistry.registerEntityRenderingHandler(FCraftEntityFrog.class, new RenderEntityFrog());
 
+		MinecraftForgeClient.registerItemRenderer(FCraftWeapon.swordBuster, (IItemRenderer)new RenderBusterSword());
     }
 }
 

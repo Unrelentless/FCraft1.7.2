@@ -14,7 +14,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.unrelentless.fcraft.FantasyCraft;
-import com.unrelentless.fcraft.blocks.tile.TileEntityBlockAdamOre;
+import com.unrelentless.fcraft.blocks.tiles.TileEntityBlockAdamOre;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -1,14 +1,14 @@
 package com.unrelentless.fcraft.creativetabs;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 
-public class FCraftCreativeTab extends CreativeTabs{
+public class FCraftCreativeTabWeapons extends CreativeTabs{
 
-	public FCraftCreativeTab(int tabID, String label) {
+	public FCraftCreativeTabWeapons(int tabID, String label) {
 		super(tabID, label);
 	}
 
@@ -16,13 +16,13 @@ public class FCraftCreativeTab extends CreativeTabs{
     @SideOnly(Side.CLIENT)
     public String getTranslatedTabLabel()
     {
-        return "Fantasy Craft";
+        return "Fantasy Craft Weapons";
     }
     
 	@Override
 	public Item getTabIconItem() {
 		// TODO Auto-generated method stub
-		return Item.getItemFromBlock(Blocks.fire);
+		return Items.fireworks;
 	}
 
 }

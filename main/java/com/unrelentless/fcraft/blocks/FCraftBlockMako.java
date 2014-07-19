@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.unrelentless.fcraft.FantasyCraft;
-import com.unrelentless.fcraft.blocks.tile.TileEntityBlockMako;
+import com.unrelentless.fcraft.blocks.tiles.TileEntityBlockMako;
 
 public class FCraftBlockMako extends BlockContainer {
 
