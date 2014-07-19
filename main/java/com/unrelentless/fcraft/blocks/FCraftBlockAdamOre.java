@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
@@ -48,7 +47,6 @@ public class FCraftBlockAdamOre extends BlockContainer {
 		return texture;
 	}
 
-	//Makes sure that only the name and not tile.name is sent.
 	protected String getUnwrappedUnlocalizedName(String name){
 		return name.substring(name.indexOf(".") + 1);
 	}

@@ -34,7 +34,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class FantasyCraft
 {
 	public static final String MODID = "fcraft";
-	public static final String VERSION = "0.1.6";
+	public static final String VERSION = "0.1.7";
 
 	//Keybinds
 	public static KeyBinding scan, scanPoke;

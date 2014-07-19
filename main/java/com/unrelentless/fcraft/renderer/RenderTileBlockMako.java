@@ -27,8 +27,7 @@ public class RenderTileBlockMako extends TileEntitySpecialRenderer  {
 
 		TileEntityBlockMako tile = (TileEntityBlockMako) tileEntity;
 		float[] colours = tile.getColour();
-		double randomScale = (rand.nextInt(3)+5)/10;
-
+		
 		GL11.glPushMatrix();
 		GL11.glColor3f(colours[0],colours[1],colours[2]);
 		GL11.glEnable(3042);

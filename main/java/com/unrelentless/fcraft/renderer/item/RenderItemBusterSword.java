@@ -1,7 +1,6 @@
-package com.unrelentless.fcraft.renderer;
+package com.unrelentless.fcraft.renderer.item;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
@@ -12,12 +11,12 @@ import com.unrelentless.fcraft.FantasyCraft;
 import com.unrelentless.fcraft.model.ModelBusterSword;
 
 
-public class RenderBusterSword implements IItemRenderer {
+public class RenderItemBusterSword implements IItemRenderer {
 
 	protected ModelBusterSword busterModel;
 	private ResourceLocation texture = new ResourceLocation(FantasyCraft.MODID + ":textures/items/BusterSword.png");
 
-	public RenderBusterSword()
+	public RenderItemBusterSword()
 	{
 		busterModel = new ModelBusterSword();
 	}
@@ -42,7 +41,10 @@ public class RenderBusterSword implements IItemRenderer {
 					helper == ItemRendererHelper.BLOCK_3D);
 		}
 		case INVENTORY: {
-			return (helper == ItemRendererHelper.INVENTORY_BLOCK);
+			return (helper == ItemRendererHelper.ENTITY_BOBBING ||
+					helper == ItemRendererHelper.ENTITY_ROTATION ||
+					helper == ItemRendererHelper.INVENTORY_BLOCK ||
+					helper == ItemRendererHelper.BLOCK_3D);
 		}
 		default: {
 			return false;
@@ -58,7 +60,7 @@ public class RenderBusterSword implements IItemRenderer {
 
 		switch(type){
 		case EQUIPPED:{
-		
+
 			GL11.glPushMatrix();
 
 			GL11.glScalef(2.0F, 2.0F, 2.0F);
@@ -66,7 +68,7 @@ public class RenderBusterSword implements IItemRenderer {
 			GL11.glRotatef(-90F, 0, 0, 1);
 			GL11.glRotatef(-40F, -1, 0, 0);
 			GL11.glTranslatef(0, 0.3F, -0.3F);
-			
+
 			busterModel.render();
 			GL11.glPopMatrix();
 			break;
@@ -74,21 +76,19 @@ public class RenderBusterSword implements IItemRenderer {
 		case EQUIPPED_FIRST_PERSON:{			
 			GL11.glPushMatrix();
 
-			GL11.glScalef(5.0F, 5.0F, 5.0F);
-			GL11.glRotatef(90F, 1, 1, 0);
-			GL11.glRotatef(90F, 0, 1, 0);
-			//GL11.glTranslatef(2F, 0, 0F);
+			GL11.glScalef(2.0F, 2.0F, 2.0F);
+			GL11.glRotatef(-90F, 0, 1, 0);
+			GL11.glTranslatef(0F, 0F, -0.5F);
+			GL11.glRotatef(-45F, 1, 0, 0);
+
 			busterModel.render();
 			GL11.glPopMatrix();
 			break;
 		}
-		case INVENTORY:{
-			busterModel.render();
-		}
 		case ENTITY:{
 			GL11.glPushMatrix();
-			GL11.glRotatef(90F, 1, 0, 0);	
-			GL11.glTranslatef(0.4F, -0.55F, 0);
+			GL11.glScalef(2.0F, 2.0F, 2.0F);
+			GL11.glRotatef(-90F, 1, 0, 0);	
 			busterModel.render();
 			GL11.glPopMatrix();
 		}
