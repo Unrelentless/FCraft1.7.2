@@ -1,5 +1,7 @@
 package com.unrelentless.fcraft.renderer.item;
 
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -54,11 +56,19 @@ public class RenderItemBlockMako implements IItemRenderer {
 			GL11.glPopMatrix();
 			break;
 		}
+		case INVENTORY:{
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0F, -0.4F, 0);
+			model.renderAll();
+			GL11.glPopMatrix();
+			break;
+		}
 		case ENTITY:{
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0F, -0.4F, 0);
 			model.renderAll();
 			GL11.glPopMatrix();
+			break;
 		}
 		default: break;
 		}

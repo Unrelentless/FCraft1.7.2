@@ -85,12 +85,27 @@ public class RenderItemBusterSword implements IItemRenderer {
 			GL11.glPopMatrix();
 			break;
 		}
-		case ENTITY:{
+		case INVENTORY:{
 			GL11.glPushMatrix();
+			
 			GL11.glScalef(2.0F, 2.0F, 2.0F);
 			GL11.glRotatef(-90F, 1, 0, 0);	
+			GL11.glRotatef(35F, 1, 0, 0);
+			GL11.glTranslatef(0.5F, -0.2F, -0.2F);
+			
 			busterModel.render();
 			GL11.glPopMatrix();
+			break;
+		}
+		case ENTITY:{
+			GL11.glPushMatrix();
+			
+			GL11.glScalef(2.0F, 2.0F, 2.0F);
+			GL11.glRotatef(-90F, 1, 0, 0);	
+			
+			busterModel.render();
+			GL11.glPopMatrix();
+			break;
 		}
 		default: break;
 		}
