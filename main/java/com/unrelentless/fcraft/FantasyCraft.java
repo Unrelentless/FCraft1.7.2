@@ -4,6 +4,8 @@ package com.unrelentless.fcraft;
 import java.io.File;
 import java.io.IOException;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,6 +23,7 @@ import com.unrelentless.fcraft.items.weapons.FCraftWeapon;
 import com.unrelentless.fcraft.packets.PacketPipeline;
 import com.unrelentless.fcraft.proxy.CommonProxy;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -37,7 +40,7 @@ public class FantasyCraft
 	public static final String VERSION = "0.1.7";
 
 	//Keybinds
-	public static KeyBinding scan, scanPoke;
+	public static KeyBinding socketMateria;
 
 	//says where the client and server 'proxy' code is loaded
 	@SidedProxy(clientSide = "com.unrelentless.fcraft.proxy.ClientProxy", serverSide = "com.unrelentless.fcraft.proxy.CommonProxy")
@@ -67,10 +70,8 @@ public class FantasyCraft
 		proxy.registerRenderers();
 		packetPipeline.initialise();
 		//keybinding
-		/*		scan = new KeyBinding("key.scanBlock", Keyboard.KEY_F, "key.categories.xxxmod");
-		scanPoke = new KeyBinding("key.scanPoke", Keyboard.KEY_G, "key.categories.xxxmod");
-		ClientRegistry.registerKeyBinding(scan);
-		ClientRegistry.registerKeyBinding(scanPoke);*/
+		socketMateria = new KeyBinding("key.socket", Keyboard.KEY_F, "Materia Socketing");
+		ClientRegistry.registerKeyBinding(socketMateria);
 
 		//event registration
 		FMLCommonHandler.instance().bus().register(new KeybindHandler());

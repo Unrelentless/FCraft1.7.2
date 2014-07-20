@@ -121,6 +121,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	// IMPORTANT: Always remember to add your newly created packet classes here or you WILL crash
 	public void registerPackets() {
 		registerPacket(SyncPlayerPropsPacket.class);
+		registerPacket(OpenGuiPacket.class);
 	}
 
 	// Method to call from FMLPostInitializationEvent

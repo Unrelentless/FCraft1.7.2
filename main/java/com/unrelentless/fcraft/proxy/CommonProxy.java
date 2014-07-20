@@ -3,6 +3,8 @@ package com.unrelentless.fcraft.proxy;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.unrelentless.fcraft.gui.GuiSocket;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -24,8 +26,8 @@ public class CommonProxy implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		switch(ID)
-		{
+		switch(ID){
+		case 0: return new GuiSocket(player);
 		default: return null;
 		}
 	}
