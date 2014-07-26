@@ -4,11 +4,11 @@ package com.unrelentless.fcraft;
 import java.io.File;
 import java.io.IOException;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+
+import org.lwjgl.input.Keyboard;
 
 import com.unrelentless.fcraft.blocks.FCraftBlock;
 import com.unrelentless.fcraft.blocks.tiles.FCraftTileEntity;
@@ -32,12 +32,13 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid = FantasyCraft.MODID, version = FantasyCraft.VERSION)
 public class FantasyCraft
 {
 	public static final String MODID = "fcraft";
-	public static final String VERSION = "0.1.7";
+	public static final String VERSION = "0.1.8";
 
 	//Keybinds
 	public static KeyBinding socketMateria;
@@ -65,14 +66,15 @@ public class FantasyCraft
 		FCraftWeapon.init();
 	}
 	@EventHandler
-	public void init(FMLInitializationEvent event)
+	public void load(FMLInitializationEvent event)
 	{        
 		proxy.registerRenderers();
 		packetPipeline.initialise();
 		//keybinding
-		socketMateria = new KeyBinding("key.socket", Keyboard.KEY_F, "Materia Socketing");
+		socketMateria = new KeyBinding("Materia Socket", Keyboard.KEY_F, "FantasyCraft");
 		ClientRegistry.registerKeyBinding(socketMateria);
-
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new CommonProxy());
+		
 		//event registration
 		FMLCommonHandler.instance().bus().register(new KeybindHandler());
 		MinecraftForge.EVENT_BUS.register(new ZodiacEventHandler());

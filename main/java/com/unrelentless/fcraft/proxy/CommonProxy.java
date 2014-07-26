@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.unrelentless.fcraft.gui.GuiSocket;
+import com.unrelentless.fcraft.inventory.ContainerSocket;
+import com.unrelentless.fcraft.inventory.InventorySocket;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,27 +13,31 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler {
-	
+
 	private static final Map<String, NBTTagCompound> extendedEntityData = new HashMap<String, NBTTagCompound>();
 
 	public void registerRenderers() {
 
 	}
-	
+
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		return null;
+		switch(ID){
+		case GuiSocket.GUI_ID: return new GuiSocket(player, player.inventory, new InventorySocket());
+		default: return null;
+		}
 	}
+
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		switch(ID){
-		case 0: return new GuiSocket(player);
+		case GuiSocket.GUI_ID: return new ContainerSocket(player, player.inventory, new InventorySocket());
 		default: return null;
 		}
 	}
-	
+
 	/**
 	 * Adds an entity's custom data to the map for temporary storage
 	 * @param compound An NBT Tag Compound that stores the IExtendedEntityProperties data only

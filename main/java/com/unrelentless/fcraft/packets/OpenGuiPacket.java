@@ -34,7 +34,6 @@ public class OpenGuiPacket extends AbstractPacket
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-		// for opening a GUI, we don't need to do anything here
 	}
 
 	@Override
