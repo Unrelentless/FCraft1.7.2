@@ -25,13 +25,13 @@ public class ContainerSocket extends Container
 		// Add vanilla PLAYER INVENTORY - just copied/pasted from vanilla classes
 		for (i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 48 + j * 18, 116 + i * 18));
 			}
 		}
 
 		// Add ACTION BAR - just copied/pasted from vanilla classes
 		for (i = 0; i < 9; ++i) {
-			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
+			addSlotToContainer(new Slot(inventoryPlayer, i, 48 + i * 18, 174));
 		}
 	}
 
