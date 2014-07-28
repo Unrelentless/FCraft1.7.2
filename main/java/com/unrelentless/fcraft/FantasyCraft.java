@@ -13,12 +13,14 @@ import org.lwjgl.input.Keyboard;
 import com.unrelentless.fcraft.blocks.FCraftBlock;
 import com.unrelentless.fcraft.blocks.tiles.FCraftTileEntity;
 import com.unrelentless.fcraft.creativetabs.FCraftCreativeTabBlock;
+import com.unrelentless.fcraft.creativetabs.FCraftCreativeTabItem;
 import com.unrelentless.fcraft.creativetabs.FCraftCreativeTabWeapons;
 import com.unrelentless.fcraft.entity.FCraftEntity;
 import com.unrelentless.fcraft.events.ExtendedPropertiesHandler;
 import com.unrelentless.fcraft.events.ZodiacEventHandler;
 import com.unrelentless.fcraft.handlers.ConfigHandler;
 import com.unrelentless.fcraft.handlers.KeybindHandler;
+import com.unrelentless.fcraft.items.FCraftItem;
 import com.unrelentless.fcraft.items.weapons.FCraftWeapon;
 import com.unrelentless.fcraft.packets.PacketPipeline;
 import com.unrelentless.fcraft.proxy.CommonProxy;
@@ -50,6 +52,8 @@ public class FantasyCraft
 	//Set Creative Tabs
 	public static CreativeTabs fcraftTabBlocks = new FCraftCreativeTabBlock(CreativeTabs.getNextID(), MODID);
 	public static CreativeTabs fcraftTabWeapons = new FCraftCreativeTabWeapons(CreativeTabs.getNextID(), MODID);
+	public static CreativeTabs fcraftTabItems = new FCraftCreativeTabItem(CreativeTabs.getNextID(), MODID);
+	
 	//Set Packet Handling
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
@@ -61,6 +65,7 @@ public class FantasyCraft
 
 		ConfigHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + FantasyCraft.MODID + File.separator + FantasyCraft.MODID + ".cfg"));	
 		FCraftTileEntity.init();
+		FCraftItem.init();
 		FCraftBlock.init();
 		FCraftEntity.init();
 		FCraftWeapon.init();

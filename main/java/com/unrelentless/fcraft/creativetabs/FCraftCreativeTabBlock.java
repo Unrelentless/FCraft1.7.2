@@ -1,5 +1,7 @@
 package com.unrelentless.fcraft.creativetabs;
 
+import com.unrelentless.fcraft.blocks.FCraftBlock;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,7 +24,7 @@ public class FCraftCreativeTabBlock extends CreativeTabs{
 	@Override
 	public Item getTabIconItem() {
 		// TODO Auto-generated method stub
-		return Item.getItemFromBlock(Blocks.fire);
+		return Item.getItemFromBlock(FCraftBlock.blockMako);
 	}
 
 }

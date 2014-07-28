@@ -4,6 +4,8 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -12,6 +14,7 @@ import com.unrelentless.fcraft.FantasyCraft;
 import com.unrelentless.fcraft.inventory.ContainerSocket;
 import com.unrelentless.fcraft.inventory.InventorySocket;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -57,7 +60,7 @@ public class GuiSocket extends GuiContainer
 		// if that's not important to you, since we are overriding the default inventory rather than
 		// creating a specific type of inventory
 
-/*		String s = inventory.hasCustomInventoryName() ? inventory.getInventoryName() : I18n.format(inventory.getInventoryName());
+		/*		String s = inventory.hasCustomInventoryName() ? inventory.getInventoryName() : I18n.format(inventory.getInventoryName());
 		// with the name "Custom Inventory", the 'Cu' will be drawn in the first slot
 		fontRendererObj.drawString(s, xSize - fontRendererObj.getStringWidth(s), 12, 4210752);
 		// this just adds "Inventory" above the player's inventory below
@@ -71,9 +74,12 @@ public class GuiSocket extends GuiContainer
 	protected void drawGuiContainerBackgroundLayer(float f, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(iconLocation);
+		ItemStack itemStack = FMLClientHandler.instance().getClientPlayerEntity().getCurrentEquippedItem();
 		int k = (this.width - 256) / 2;
 		int l = (this.height - 230) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, 256, 230);
-		this.drawTexturedModalRect(k+70, l+20, 0, 238, 18, 18);
+		for(int i=0;i<itemStack.stackTagCompound.getInteger("CurrentSockets");i++){
+			this.drawTexturedModalRect(k+70+(i*18), l+20, 0, 238, 18, 18);
+		}
 	}
 }

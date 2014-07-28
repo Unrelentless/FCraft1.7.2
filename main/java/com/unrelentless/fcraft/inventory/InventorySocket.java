@@ -1,5 +1,7 @@
 package com.unrelentless.fcraft.inventory;
 
+import com.unrelentless.fcraft.items.FCraftItemMateria;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -9,15 +11,15 @@ import net.minecraft.nbt.NBTTagList;
 public class InventorySocket implements IInventory
 {
 	/** The name your custom inventory will display in the GUI, possibly just "Inventory" */
-	private final String name = "Custom Inventory";
+	private final String name = "Socket Inventory";
 
 	/** The key used to store and retrieve the inventory from NBT */
-	private final String tagName = "CustomInvTag";
+	private final String tagName = "SocketInvTag";
 
 	/** Define the inventory size here for easy reference */
 	// This is also the place to define which slot is which if you have different types,
 	// for example SLOT_SHIELD = 0, SLOT_AMULET = 1;
-	public static final int INV_SIZE = 2;
+	public static final int INV_SIZE = 4;
 
 	/** Inventory's size must be same as number of slots you add to the Container class */
 	private ItemStack[] inventory = new ItemStack[INV_SIZE];
@@ -113,11 +115,11 @@ public class InventorySocket implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack)
 	{
-		// If you have different kinds of slots, then check them here:
-		// if (slot == SLOT_SHIELD && stack.getItem() instanceof ItemShield) return true;
-
-		// For now, only ItemUseMana items can be stored in these slots
-		return true;
+		// We only want our custom item to be storable in this slot
+		if(stack.getItem() instanceof FCraftItemMateria){
+			return true;
+		}
+		return false;
 	}
 
 	public void writeToNBT(NBTTagCompound compound) {

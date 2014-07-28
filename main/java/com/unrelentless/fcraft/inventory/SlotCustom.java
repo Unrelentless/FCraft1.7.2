@@ -4,6 +4,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import com.unrelentless.fcraft.items.FCraftItemMateria;
+
 public class SlotCustom extends Slot
 {
 	public SlotCustom(IInventory inventory, int slotIndex, int x, int y) {
@@ -17,6 +19,9 @@ public class SlotCustom extends Slot
 	@Override
 	public boolean isItemValid(ItemStack stack) {
 		// We only want our custom item to be storable in this slot
-		return true;
+		if(stack.getItem() instanceof FCraftItemMateria){
+			return true;
+		}
+		return false;
 	}
 }

@@ -10,17 +10,22 @@ import net.minecraft.item.ItemStack;
 public class ContainerSocket extends Container
 {
 	/** Avoid magic numbers! This will greatly reduce the chance of you making errors in 'transferStackInSlot' method */
-	private static final int ARMOR_START = InventorySocket.INV_SIZE, ARMOR_END = ARMOR_START+3,
+	private static final int ARMOR_START = 2, ARMOR_END = ARMOR_START+3,
 			INV_START = ARMOR_END+1, INV_END = INV_START+26, HOTBAR_START = INV_END+1, HOTBAR_END = HOTBAR_START+8;
 
+	public int numberOfSlots;
+
 	public ContainerSocket(EntityPlayer player, InventoryPlayer inventoryPlayer, InventorySocket inventoryCustom) {
+
+		numberOfSlots = player.getCurrentEquippedItem().stackTagCompound.getInteger("CurrentSockets");
+
 		int i;
 
 		// Add CUSTOM slots - we'll just add two for now, both of the same type.
 		// Make a new Slot class for each different item type you want to add
-		addSlotToContainer(new SlotCustom(inventoryCustom, 0, 80, 8));
-		addSlotToContainer(new SlotCustom(inventoryCustom, 1, 80, 26));
-
+		for(int k=0;k<numberOfSlots;k++){
+			addSlotToContainer(new SlotCustom(inventoryCustom, k, 31+(k*18), -11));
+		}
 
 		// Add vanilla PLAYER INVENTORY - just copied/pasted from vanilla classes
 		for (i = 0; i < 3; ++i) {

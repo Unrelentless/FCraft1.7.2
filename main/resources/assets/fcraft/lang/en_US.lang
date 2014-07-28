@@ -18,7 +18,7 @@ tile.ore.scarletore.name=Scarletite Ore
 ################################
 #	ITEMS
 ################################
-
+item.green_materia.name=Green Materia
 
 
 
@@ -49,3 +49,7 @@ entity.entityOrichalcum.name=Orichalcum
 ################################
 #	TOOLTIPS
 ################################
+green1=Fire
+green2=Thunder
+green3=Blizzard
+green4=Quake
