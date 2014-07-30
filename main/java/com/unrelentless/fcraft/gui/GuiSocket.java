@@ -4,6 +4,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -28,7 +29,7 @@ public class GuiSocket extends GuiContainer
 	private float ySize_lo;
 
 	/** Normally I use '(ModInfo.MOD_ID, "textures/...")', but it can be done this way as well */
-	private static final ResourceLocation iconLocation = new ResourceLocation(FantasyCraft.MODID + ":textures/gui/Socket_Sword.png");
+	private static final ResourceLocation iconLocation = new ResourceLocation(FantasyCraft.MODID + ":textures/gui/socketingGui.png");
 
 	public static final int GUI_ID = 20;
 
@@ -59,12 +60,20 @@ public class GuiSocket extends GuiContainer
 		// This method will simply draw inventory's name on the screen - you could do without it entirely
 		// if that's not important to you, since we are overriding the default inventory rather than
 		// creating a specific type of inventory
+		//		/String s = inventory.hasCustomInventoryName() ? inventory.getInventoryName() : I18n.format(inventory.getInventoryName());
+		EntityPlayer player = FMLClientHandler.instance().getClientPlayerEntity();
+		int numOfSockets = player.getCurrentEquippedItem().stackTagCompound.getInteger("CurrentSockets");
 
-		/*		String s = inventory.hasCustomInventoryName() ? inventory.getInventoryName() : I18n.format(inventory.getInventoryName());
-		// with the name "Custom Inventory", the 'Cu' will be drawn in the first slot
-		fontRendererObj.drawString(s, xSize - fontRendererObj.getStringWidth(s), 12, 4210752);
-		// this just adds "Inventory" above the player's inventory below
-		fontRendererObj.drawString(I18n.format("container.inventory"), 80, ySize - 96, 4210752);*/
+		for(int i=0;i<numOfSockets;i++){
+			if(this.inventory.getStackInSlot(i) != null){
+				int materiaID = Item.getIdFromItem(this.inventory.getStackInSlot(i).getItem());
+				int materiaMeta = this.inventory.getStackInSlot(i).getItemDamage();
+				String s = (String) new ItemStack(Item.getItemById(materiaID), 1, materiaMeta).getTooltip(player, true).get(1);
+				fontRendererObj.drawString(s, xSize - fontRendererObj.getStringWidth(s)/2-70, 5+(i*21), 4210752);
+			}else{
+				fontRendererObj.drawString("--", xSize - fontRendererObj.getStringWidth("--")/2-70, 5+(i*21), 4210752);
+			}
+		}
 	}
 
 	/**
@@ -79,7 +88,8 @@ public class GuiSocket extends GuiContainer
 		int l = (this.height - 230) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, 256, 230);
 		for(int i=0;i<itemStack.stackTagCompound.getInteger("CurrentSockets");i++){
-			this.drawTexturedModalRect(k+70+(i*18), l+20, 0, 238, 18, 18);
+			this.drawTexturedModalRect(k+40, l+31+(i*21), 0, 238, 18, 18);
+			this.drawTexturedModalRect(k+230, l+31+(i*21), 0, 238, 18, 18);
 		}
 	}
 }

@@ -22,7 +22,7 @@ public class InventorySocket implements IInventory
 	public static final int INV_SIZE = 4;
 
 	/** Inventory's size must be same as number of slots you add to the Container class */
-	private ItemStack[] inventory = new ItemStack[INV_SIZE];
+	public static ItemStack[] inventory = new ItemStack[INV_SIZE];
 
 	public InventorySocket() {
 		// don't need anything here!
@@ -123,7 +123,7 @@ public class InventorySocket implements IInventory
 	}
 
 	public void writeToNBT(NBTTagCompound compound) {
-		NBTTagList items = new NBTTagList();
+/*		NBTTagList items = new NBTTagList();
 		for (int i = 0; i < getSizeInventory(); ++i) {
 			if (getStackInSlot(i) != null) {
 				NBTTagCompound item = new NBTTagCompound();
@@ -133,17 +133,17 @@ public class InventorySocket implements IInventory
 			}
 		}
 
-		compound.setTag(tagName, items);
+		compound.setTag(tagName, items);*/
 	}
 
 	public void readFromNBT(NBTTagCompound compound) {
-		NBTTagList items = compound.getTagList(tagName, compound.getId());
+/*		NBTTagList items = compound.getTagList(tagName, compound.getId());
 		for (int i = 0; i < items.tagCount(); ++i) {
 			NBTTagCompound item = items.getCompoundTagAt(i);
 			byte slot = item.getByte("Slot");
 			if (slot >= 0 && slot < getSizeInventory()) {
 				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
 			}
-		}
+		}*/
 	}
 }

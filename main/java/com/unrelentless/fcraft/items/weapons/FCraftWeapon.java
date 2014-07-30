@@ -106,9 +106,6 @@ public class FCraftWeapon extends ItemSword{
 			par3List.add(EnumChatFormatting.GRAY + "---------------");
 			for(int i=0;i<par1ItemStack.stackTagCompound.getInteger("CurrentSockets");i++){
 
-				int materiaID = par1ItemStack.stackTagCompound.getInteger("SocketContents"+i);
-				int materiaMeta = par1ItemStack.stackTagCompound.getInteger("SocketContentsMeta"+i);
-
 				if(par1ItemStack.stackTagCompound.getInteger("SocketContents"+i) != 0){
 
 /*					if(par1ItemStack.stackTagCompound.getInteger("SocketContents"+i) == ItemID.MATERIA_BLACK_ID+256){

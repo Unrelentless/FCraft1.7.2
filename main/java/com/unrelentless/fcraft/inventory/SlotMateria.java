@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 
 import com.unrelentless.fcraft.items.FCraftItemMateria;
 
-public class SlotCustom extends Slot
+public class SlotMateria extends Slot
 {
-	public SlotCustom(IInventory inventory, int slotIndex, int x, int y) {
+	public SlotMateria(IInventory inventory, int slotIndex, int x, int y) {
 		super(inventory, slotIndex, x, y);
 	}
 

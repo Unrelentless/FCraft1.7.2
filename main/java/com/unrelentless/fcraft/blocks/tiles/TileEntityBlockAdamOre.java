@@ -79,9 +79,6 @@ public class TileEntityBlockAdamOre extends TileEntity {
 			for(int j=-1;j<=1;j++){
 				for(int k=-1;k<=1;k++){
 					if(world.getBlock(coords[0]+i, coords[1]+j, coords[2]+k) == Blocks.stone){
-						//stoneCoords[0] = i;
-						//stoneCoords[1] = j;
-						//stoneCoords[2] = k;
 						stringCoords = ""+i+"<"+j+">"+k;
 						blockCoordList.add(stringCoords);
 					}
@@ -91,10 +88,6 @@ public class TileEntityBlockAdamOre extends TileEntity {
 		if(blockCoordList.size() != 0){
 			int random = rand.nextInt(blockCoordList.size());
 			String tempString = blockCoordList.get(random);
-			System.out.println(tempString.substring(0, tempString.indexOf("<")));
-			System.out.println(tempString.substring(tempString.indexOf("<")+1, tempString.indexOf(">")));
-			System.out.println(tempString.substring(tempString.indexOf(">")+1));
-			
 			stoneCoords[0] = Integer.parseInt(tempString.substring(0, tempString.indexOf("<")));
 			stoneCoords[1] = Integer.parseInt(tempString.substring(tempString.indexOf("<")+1, tempString.indexOf(">")));
 			stoneCoords[2] = Integer.parseInt(tempString.substring(tempString.indexOf(">")+1));
