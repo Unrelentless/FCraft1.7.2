@@ -1,10 +1,8 @@
 package com.unrelentless.fcraft.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -22,12 +20,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiSocket extends GuiContainer
 {
-	/** x size of the inventory window in pixels. Defined as float, passed as int */
-	private float xSize_lo;
-
-	/** y size of the inventory window in pixels. Defined as float, passed as int. */
-	private float ySize_lo;
-
 	/** Normally I use '(ModInfo.MOD_ID, "textures/...")', but it can be done this way as well */
 	private static final ResourceLocation iconLocation = new ResourceLocation(FantasyCraft.MODID + ":textures/gui/socketingGui.png");
 
@@ -48,8 +40,6 @@ public class GuiSocket extends GuiContainer
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float f) {
 		super.drawScreen(mouseX, mouseY, f);
-		xSize_lo = mouseX;
-		ySize_lo = mouseY;
 	}
 
 	/**

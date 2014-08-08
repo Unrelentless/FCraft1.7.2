@@ -3,13 +3,14 @@ package com.unrelentless.fcraft.proxy;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+
 import com.unrelentless.fcraft.gui.GuiSocket;
 import com.unrelentless.fcraft.inventory.ContainerSocket;
 import com.unrelentless.fcraft.inventory.InventorySocket;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler {
@@ -24,8 +25,8 @@ public class CommonProxy implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		switch(ID){
-		case GuiSocket.GUI_ID: return new GuiSocket(player, player.inventory, new InventorySocket());
-		default: return null;
+		case GuiSocket.GUI_ID: return new GuiSocket(player, player.inventory, new InventorySocket(player.getHeldItem()));
+	default: return null;
 		}
 	}
 
@@ -33,7 +34,7 @@ public class CommonProxy implements IGuiHandler {
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		switch(ID){
-		case GuiSocket.GUI_ID: return new ContainerSocket(player, player.inventory, new InventorySocket());
+		case GuiSocket.GUI_ID: return new ContainerSocket(player, player.inventory, new InventorySocket(player.getHeldItem()));
 		default: return null;
 		}
 	}

@@ -1,12 +1,11 @@
 package com.unrelentless.fcraft.inventory;
 
-import com.unrelentless.fcraft.items.FCraftItemMateria;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+
+import com.unrelentless.fcraft.items.FCraftItemMateria;
 
 public class InventorySocket implements IInventory
 {
@@ -14,18 +13,24 @@ public class InventorySocket implements IInventory
 	private final String name = "Socket Inventory";
 
 	/** The key used to store and retrieve the inventory from NBT */
-	private final String tagName = "SocketInvTag";
+	//private final String tagName = "SocketInvTag";
 
 	/** Define the inventory size here for easy reference */
 	// This is also the place to define which slot is which if you have different types,
 	// for example SLOT_SHIELD = 0, SLOT_AMULET = 1;
 	public static final int INV_SIZE = 4;
 
+	private final ItemStack invStack;
+
 	/** Inventory's size must be same as number of slots you add to the Container class */
 	public static ItemStack[] inventory = new ItemStack[INV_SIZE];
 
-	public InventorySocket() {
-		// don't need anything here!
+	public InventorySocket(ItemStack stack) {
+		this.invStack = stack;
+		if (!invStack.hasTagCompound()) {
+			invStack.setTagCompound(new NBTTagCompound());
+		}
+		readFromNBT(invStack.getTagCompound());
 	}
 
 	@Override
@@ -98,7 +103,12 @@ public class InventorySocket implements IInventory
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return true;
+		// this will close the inventory if the player tries to move
+		// the item that opened it, but you need to return this method
+		// from the Container's canInteractWith method
+		// an alternative would be to override the slotClick method and
+		// prevent the current item slot from being clicked
+		return player.getHeldItem() == invStack;
 	}
 
 	@Override
@@ -123,7 +133,7 @@ public class InventorySocket implements IInventory
 	}
 
 	public void writeToNBT(NBTTagCompound compound) {
-/*		NBTTagList items = new NBTTagList();
+		/*		NBTTagList items = new NBTTagList();
 		for (int i = 0; i < getSizeInventory(); ++i) {
 			if (getStackInSlot(i) != null) {
 				NBTTagCompound item = new NBTTagCompound();
@@ -137,7 +147,7 @@ public class InventorySocket implements IInventory
 	}
 
 	public void readFromNBT(NBTTagCompound compound) {
-/*		NBTTagList items = compound.getTagList(tagName, compound.getId());
+		/*		NBTTagList items = compound.getTagList(tagName, compound.getId());
 		for (int i = 0; i < items.tagCount(); ++i) {
 			NBTTagCompound item = items.getCompoundTagAt(i);
 			byte slot = item.getByte("Slot");

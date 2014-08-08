@@ -24,4 +24,9 @@ public class SlotMateria extends Slot
 		}
 		return false;
 	}
+
+	@Override
+	public int getSlotStackLimit() {
+		return 1;
+	}
 }

@@ -18,6 +18,8 @@ public class ContainerSocket extends Container
 
 	public int numberOfSlots;
 
+	InventorySocket inventory;
+
 	public ContainerSocket(EntityPlayer player, InventoryPlayer inventoryPlayer, InventorySocket inventoryCustom) {
 
 		numberOfSlots = player.getCurrentEquippedItem().stackTagCompound.getInteger("CurrentSockets");
@@ -27,9 +29,6 @@ public class ContainerSocket extends Container
 		HOTBAR_START = INV_END+1;
 		HOTBAR_END = HOTBAR_START+8;
 		int i;
-
-		//Add Custom weapon slot = 0
-		//addSlotToContainer(new SlotCustom(inventoryCustom, 0, -32, -24));
 
 		// Add CUSTOM slots = 1-5 depending on number of sockets available.
 		for(i=0;i<numberOfSlots;i++){
@@ -42,16 +41,15 @@ public class ContainerSocket extends Container
 		}
 
 
-		// Add ACTION BAR - just copied/pasted from vanilla classes
-		for (i = 0; i < 9; ++i) {
-			addSlotToContainer(new Slot(inventoryPlayer, i, 48 + i * 18, 167));
-		}
-		
 		// Add vanilla PLAYER INVENTORY - just copied/pasted from vanilla classes
 		for (i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 48 + j * 18, 109 + i * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			}
+		}
+		// Add ACTION BAR - just copied/pasted from vanilla classes
+		for (i = 0; i < 9; ++i) {
+			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
 		}
 
 		materiaPut(player);
@@ -104,7 +102,21 @@ public class ContainerSocket extends Container
 	 */
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
+		// be sure to return the inventory's isUseableByPlayer method
+		// if you defined special behavior there:
 		return true;
+	}
+
+	/**
+	 *  Prevents player from moving the currently selected sword
+	 */
+	@Override
+	public ItemStack slotClick(int slot, int button, int flag, EntityPlayer player) {
+		// this will prevent the player from interacting with the item that opened the inventory:
+		if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() == player.getHeldItem()) {
+			return null;
+		}
+		return super.slotClick(slot, button, flag, player);
 	}
 
 	/**
@@ -127,7 +139,7 @@ public class ContainerSocket extends Container
 					return null;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
-			//If materia is clicked in either hotbar or inv.
+				//If materia is clicked in either hotbar or inv.
 			}else{ 
 				if (itemstack1.getItem() instanceof FCraftItemMateria) {
 					// try to place in player inventory / action bar
@@ -150,7 +162,7 @@ public class ContainerSocket extends Container
 					slot.onSlotChange(itemstack1, itemstack);
 				}
 			}
-			
+
 			if (itemstack1.stackSize == 0) {
 				slot.putStack((ItemStack) null);
 			} else {
@@ -165,5 +177,78 @@ public class ContainerSocket extends Container
 		}
 
 		return itemstack;
+	}
+
+
+	// IMPORTANT to override the mergeItemStack method if your inventory stack size limit is 1
+	/**
+	 * Vanilla method fails to account for stack size limits of one, resulting in only one
+	 * item getting placed in the slot and the rest disappearing into thin air; vanilla
+	 * method also fails to check whether stack is valid for slot
+	 */
+	@Override
+	protected boolean mergeItemStack(ItemStack stack, int start, int end, boolean backwards)
+	{
+		boolean flag1 = false;
+		int k = (backwards ? end - 1 : start);
+		Slot slot;
+		ItemStack itemstack1;
+		if (stack.isStackable())
+		{
+			while (stack.stackSize > 0 && (!backwards && k < end || backwards && k >= start))
+			{
+				slot = (Slot) inventorySlots.get(k);
+				itemstack1 = slot.getStack();
+				if (!slot.isItemValid(stack)) {
+					continue;
+				}
+				if (itemstack1 != null && itemstack1.getItem() == stack.getItem() &&
+						(!stack.getHasSubtypes() || stack.getItemDamage() == itemstack1.getItemDamage()) &&
+						ItemStack.areItemStackTagsEqual(stack, itemstack1))
+				{
+					int l = itemstack1.stackSize + stack.stackSize;
+					if (l <= stack.getMaxStackSize() && l <= slot.getSlotStackLimit()) {
+						stack.stackSize = 0;
+						itemstack1.stackSize = l;
+						inventory.markDirty();
+						flag1 = true;
+					} else if (itemstack1.stackSize < stack.getMaxStackSize() && l < slot.getSlotStackLimit()) {
+						stack.stackSize -= stack.getMaxStackSize() - itemstack1.stackSize;
+						itemstack1.stackSize = stack.getMaxStackSize();
+						inventory.markDirty();
+						flag1 = true;
+					}
+				}
+				k += (backwards ? -1 : 1);
+			}
+		}
+		if (stack.stackSize > 0)
+		{
+			k = (backwards ? end - 1 : start);
+			while (!backwards && k < end || backwards && k >= start) {
+				slot = (Slot) inventorySlots.get(k);
+				itemstack1 = slot.getStack();
+				if (!slot.isItemValid(stack)) {
+					continue;
+				}
+				if (itemstack1 == null) {
+					int l = stack.stackSize;
+					if (l <= slot.getSlotStackLimit()) {
+						slot.putStack(stack.copy());
+						stack.stackSize = 0;
+						inventory.markDirty();
+						flag1 = true;
+						break;
+					} else {
+						putStackInSlot(k, new ItemStack(stack.getItem(), slot.getSlotStackLimit(), stack.getItemDamage()));
+						stack.stackSize -= slot.getSlotStackLimit();
+						inventory.markDirty();
+						flag1 = true;
+					}
+				}
+				k += (backwards ? -1 : 1);
+			}
+		}
+		return flag1;
 	}
 }
